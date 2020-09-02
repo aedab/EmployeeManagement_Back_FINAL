@@ -9,6 +9,7 @@ import com.ausytechnologies.employeemanagement_backend.Repository.JobCategoriesR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,9 +17,26 @@ public class EmployeesService {
 
     @Autowired
     private EmployeesRepository employeesRepository;
+    @Autowired
+    private DepartmentsRepository departmentsRepository;
+    @Autowired
+    private  JobCategoriesRepository jobCategoriesRepository;
 
-    public Employees saveEmployee(Employees employee){
-        return this.employeesRepository.save(employee);
+    public Employees saveEmployee(Employees employee, int idDepartment, int idJobCategory){
+        //return this.employeesRepository.save(employee);
+        Departments department = this.departmentsRepository.findById(idDepartment);
+        JobCategories jobCategory = this.jobCategoriesRepository.findById(idJobCategory);
+
+        if(department!=null && jobCategory != null) {
+            employee.setDepartmentId(department);
+            employee.setJobCategoryId(jobCategory);
+            return this.employeesRepository.save(employee);
+        }
+        else
+        {
+            throw new RuntimeException("Department or JobCategory not found");
+        }
+
     }
 
     public Employees findEmployeeById(int id){

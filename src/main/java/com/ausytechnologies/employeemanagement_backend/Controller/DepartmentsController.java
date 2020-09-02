@@ -27,7 +27,7 @@ public class DepartmentsController {
         return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(departmentAdded);
     }
 
-    @GetMapping("/findAllDepartments")
+    @GetMapping("/getAllDepartments")
     public ResponseEntity<List<Departments>> findAllDepartments(){
 
         List<Departments> departmentsList = this.departmentsService.findAllDepartments();
@@ -35,6 +35,15 @@ public class DepartmentsController {
         httpHeaders.add("Responded","Found all the departments");
         return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(departmentsList);
 
+    }
+
+    @GetMapping("/getDepartmentById/{id}")
+    public ResponseEntity<Departments> getDepartmentById(@PathVariable int id){
+
+        Departments departmentFound = this.departmentsService.findById(id);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","Found all the departments");
+        return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(departmentFound);
     }
 
     @DeleteMapping("/deleteDepartment/{id}")
