@@ -1,5 +1,6 @@
 package com.ausytechnologies.employeemanagement_backend.Controller;
 
+import com.ausytechnologies.employeemanagement_backend.Model.DAO.Employees;
 import com.ausytechnologies.employeemanagement_backend.Model.DAO.JobCategories;
 import com.ausytechnologies.employeemanagement_backend.Service.JobCategoriesService;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -35,7 +36,6 @@ public class JobCategoriesController {
         httpHeaders.add("Responded","Found all job categories!");
         return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(getAllJobs);
     }
-
 
     @DeleteMapping("/deleteJobCategory/{id}")
     public ResponseEntity<Void> deleteJobCategory(@PathVariable int id){
