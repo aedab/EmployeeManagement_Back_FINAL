@@ -33,7 +33,7 @@ public class JobCategoriesController {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Responded","Found all job categories!");
-        return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(getAllJobs);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(getAllJobs);
     }
 
 

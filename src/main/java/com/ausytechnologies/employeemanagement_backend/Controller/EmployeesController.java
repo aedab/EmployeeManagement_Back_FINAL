@@ -10,6 +10,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeesController {
@@ -25,5 +27,27 @@ public class EmployeesController {
         return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(employeeAdded);
     }
 
+    @GetMapping("/getAllEmployees")
+    public ResponseEntity<List<Employees>> getAllEmployees(){
+        List<Employees> employeesFound = this.employeesService.findAllEmployees();
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","Added new employee");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeesFound);
+    }
+    @GetMapping("/getEmployeeById/{id}")
+    public ResponseEntity<Employees> getAllEmployees(@PathVariable int id){
+        Employees employeeFound = this.employeesService.findEmployeeById(id);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","Added new employee");
+        return ResponseEntity.status(HttpStatus.FOUND).headers(httpHeaders).body(employeeFound);
+    }
+
+    @DeleteMapping("/deleteEmployee/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable int id){
+        this.employeesService.deleteEmployeeById(id);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded", "Deleted the employee with id " + id);
+        return ResponseEntity.noContent().headers(httpHeaders).build();
+    }
 
 }

@@ -33,7 +33,7 @@ public class DepartmentsController {
         List<Departments> departmentsList = this.departmentsService.findAllDepartments();
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Responded","Found all the departments");
-        return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(departmentsList);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(departmentsList);
 
     }
 
@@ -43,14 +43,14 @@ public class DepartmentsController {
         Departments departmentFound = this.departmentsService.findById(id);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Responded","Found all the departments");
-        return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).body(departmentFound);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(departmentFound);
     }
 
     @DeleteMapping("/deleteDepartment/{id}")
     public ResponseEntity<Void> deleteDepartmentById(@PathVariable int id){
         this.departmentsService.deleteDepartmentById(id);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Responded", "Deleted the role with id " + id);
+        httpHeaders.add("Responded", "Deleted the department with id " + id);
         return ResponseEntity.noContent().headers(httpHeaders).build();
     }
 
