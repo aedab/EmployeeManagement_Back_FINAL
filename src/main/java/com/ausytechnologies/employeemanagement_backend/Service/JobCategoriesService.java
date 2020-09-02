@@ -14,7 +14,7 @@ public class JobCategoriesService {
     @Autowired
     private JobCategoriesRepository jobCategoriesRepository;
 
-    public JobCategories saveCategories(JobCategories jobCategory){
+    public JobCategories saveJobCategory(JobCategories jobCategory){
         return this.jobCategoriesRepository.save(jobCategory);
     }
 
@@ -24,6 +24,10 @@ public class JobCategoriesService {
 
     public List<JobCategories> findAllJobCategories(){
         return this.jobCategoriesRepository.findAll();
+    }
+
+    public void deleteJobCategoryById(int id){
+        this.jobCategoriesRepository.deleteById(id);
     }
 
 }

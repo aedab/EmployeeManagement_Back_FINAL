@@ -25,4 +25,8 @@ public class DepartmentsService {
     public List<Departments> findAllDepartments(){
         return this.departmentsRepository.findAll();
     }
+
+    public void deleteDepartmentById(int id){
+        this.departmentsRepository.deleteById(id);
+    }
 }

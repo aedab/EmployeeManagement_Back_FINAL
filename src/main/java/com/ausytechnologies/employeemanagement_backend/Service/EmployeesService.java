@@ -30,6 +30,9 @@ public class EmployeesService {
 
     }
 
+    public void deleteEmployeeById(int id){
+        this.employeesRepository.deleteById(id);
+    }
 
 
 }

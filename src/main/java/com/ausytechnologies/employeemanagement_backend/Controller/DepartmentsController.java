@@ -37,5 +37,13 @@ public class DepartmentsController {
 
     }
 
+    @DeleteMapping("/deleteDepartment/{id}")
+    public ResponseEntity<Void> deleteDepartmentById(@PathVariable int id){
+        this.departmentsService.deleteDepartmentById(id);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded", "Deleted the role with id " + id);
+        return ResponseEntity.noContent().headers(httpHeaders).build();
+    }
+
 
 }

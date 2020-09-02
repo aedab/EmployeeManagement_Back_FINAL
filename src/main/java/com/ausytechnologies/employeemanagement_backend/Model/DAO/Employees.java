@@ -52,11 +52,11 @@ public class Employees {
     @Transient
     private boolean hasDrivingLicense;
 
-    @OneToOne(fetch = FetchType.EAGER )
+    @ManyToOne(fetch = FetchType.EAGER )
     @JoinColumn(name = "departmentId")
     private Departments departmentId;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jobCategoryId")
     private JobCategories jobCategoryId;
 
