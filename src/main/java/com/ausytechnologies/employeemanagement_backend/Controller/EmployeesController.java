@@ -3,7 +3,9 @@ package com.ausytechnologies.employeemanagement_backend.Controller;
 import com.ausytechnologies.employeemanagement_backend.Model.DAO.Departments;
 import com.ausytechnologies.employeemanagement_backend.Model.DAO.Employees;
 import com.ausytechnologies.employeemanagement_backend.Model.DAO.JobCategories;
+import com.ausytechnologies.employeemanagement_backend.Model.DTO.EmployeesDto;
 import com.ausytechnologies.employeemanagement_backend.Service.DepartmentsService;
+import com.ausytechnologies.employeemanagement_backend.Service.EmployeesMapping;
 import com.ausytechnologies.employeemanagement_backend.Service.EmployeesService;
 import com.ausytechnologies.employeemanagement_backend.Service.JobCategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,6 +29,8 @@ public class EmployeesController {
     private DepartmentsService departmentsService;
     @Autowired
     private JobCategoriesService jobCategoriesService;
+    @Autowired
+    private EmployeesMapping employeesMapping;
 
     @PostMapping("/addEmployee/{idDepartment}/{idJobCategory}")
     public ResponseEntity<Employees> addEmployee(@RequestBody Employees employee, @PathVariable int idDepartment, @PathVariable int idJobCategory){
@@ -88,5 +93,22 @@ public class EmployeesController {
         httpHeaders.add("Responded", "Deleted the employee with id " + id);
         return ResponseEntity.noContent().headers(httpHeaders).build();
     }
+
+    //EMPLOYEES_DTO  FUNCTIONS
+
+    @GetMapping("/getAllEmployeesDTO")
+    public ResponseEntity<List<EmployeesDto>> getAllEmployeesDTO(){
+        List<Employees> employeesList = employeesService.findAllEmployees();
+        List<EmployeesDto> employeesDtoList = new ArrayList<>();
+        for(int i = 0; i < employeesList.size(); i++){
+           employeesDtoList.add(this.employeesMapping.convertToDto(employeesList.get(i)));
+        }
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","EmployeesDTO found successfully");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeesDtoList);
+
+    }
+
 
 }
