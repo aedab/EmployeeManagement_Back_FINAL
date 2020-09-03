@@ -110,5 +110,31 @@ public class EmployeesController {
 
     }
 
+    @GetMapping("/getEmployeesByDepartment/{idDepartment}")
+    public ResponseEntity<List<Employees>> getEmployeesByDepartment(@PathVariable int idDepartment){
+        List<Employees> listEmployees = this.employeesService.findEmployeesByDepartment(idDepartment);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","Employees found successfully");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(listEmployees);
+
+    }
+    @GetMapping("/getEmployeesByJob/{idJobCategory}")
+    public ResponseEntity<List<Employees>> getEmployeesByJob(@PathVariable int idJobCategory){
+        List<Employees> listEmployees = this.employeesService.findEmployeesByJob(idJobCategory);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","Employees found successfully");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(listEmployees);
+
+    }
+
+    @GetMapping("/getEmployeesByDepartmentAndJob/{idDepartment}/{idJobCategory}")
+    public ResponseEntity<List<Employees>> getEmployeesByDepartmentAndJob(@PathVariable int idDepartment,@PathVariable int idJobCategory){
+        List<Employees> listEmployees = this.employeesService.findEmployeesByDepartmentAndJob(idDepartment,idJobCategory);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Responded","Employees found successfully");
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(listEmployees);
+
+    }
+
 
 }

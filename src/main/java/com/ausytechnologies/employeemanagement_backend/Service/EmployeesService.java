@@ -52,6 +52,43 @@ public class EmployeesService {
         this.employeesRepository.deleteById(id);
     }
 
+    public List<Employees>  findEmployeesByDepartment(int idDepartment){
+        List<Employees> employeesList = this.employeesRepository.findAll();
+        List<Employees> employeesFound = new ArrayList<>();
+        for(int i = 0; i < employeesList.size(); i++){
+            if(employeesList.get(i).getDepartmentId().equals(departmentsRepository.findById(idDepartment))){
+                employeesFound.add(employeesList.get(i));
+            }
+        }
+        return employeesFound;
+    }
+
+    public List<Employees> findEmployeesByJob(int idJobCategory ){
+        List<Employees> employeesList = this.employeesRepository.findAll();
+        List<Employees> employeesFound = new ArrayList<>();
+
+        for(int i = 0; i < employeesList.size(); i++){
+            if(employeesList.get(i).getJobCategoryId().equals(jobCategoriesRepository.findById(idJobCategory))){
+                employeesFound.add(employeesList.get(i));
+            }
+        }
+        return employeesFound;
+    }
+
+
+    public List<Employees> findEmployeesByDepartmentAndJob (int idDepartment, int idJobCategory ){
+        List<Employees> employeesList = this.employeesRepository.findAll();
+        List<Employees> employeesFound = new ArrayList<>();
+
+        for(int i = 0; i < employeesList.size(); i++){
+            if(employeesList.get(i).getJobCategoryId().equals(jobCategoriesRepository.findById(idJobCategory)) &&
+            employeesList.get(i).getDepartmentId().equals(departmentsRepository.findById(idDepartment))){
+                employeesFound.add(employeesList.get(i));
+            }
+        }
+        return employeesFound;
+    }
+
 
 }
 
