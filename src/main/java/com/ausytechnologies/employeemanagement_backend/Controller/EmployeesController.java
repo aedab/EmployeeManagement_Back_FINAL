@@ -82,7 +82,7 @@ public class EmployeesController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Responded","Employee updated successfully");
         this.employeesService.saveEmployee(employeeToBeUpdated,idDepartment,idJobCategory);
-        return ResponseEntity.status(HttpStatus.RESET_CONTENT).headers(httpHeaders).body(employeeToBeUpdated);
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(employeeToBeUpdated);
 
     }
 
