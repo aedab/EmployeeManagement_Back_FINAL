@@ -1,5 +1,6 @@
 package com.ausytechnologies.employeemanagement_backend.Service;
 
+import com.ausytechnologies.employeemanagement_backend.Exception.ErrorNotFound;
 import com.ausytechnologies.employeemanagement_backend.Model.DAO.Departments;
 import com.ausytechnologies.employeemanagement_backend.Repository.DepartmentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,16 @@ public class DepartmentsService {
     }
 
     public Departments findById(int id){
-        return this.departmentsRepository.findById(id);
+        Departments department = this.departmentsRepository.findById(id);
+        if(department == null) throw new ErrorNotFound(id);
+        return department;
     }
 
     public List<Departments> findAllDepartments(){
-        return this.departmentsRepository.findAll();
+
+            List<Departments> departmentsList = this.departmentsRepository.findAll();
+            if(departmentsList.isEmpty()) throw new ErrorNotFound();
+            return departmentsList;
     }
 
     public void deleteDepartmentById(int id){

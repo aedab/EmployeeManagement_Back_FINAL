@@ -1,6 +1,7 @@
 package com.ausytechnologies.employeemanagement_backend.Model.DAO;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "job_categories")
@@ -13,6 +14,9 @@ public class JobCategories {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "jobCategoryId",cascade = CascadeType.ALL)
+    private List<Employees> employeesList;
 
     public int getId() {
         return id;

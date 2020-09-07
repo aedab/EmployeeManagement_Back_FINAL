@@ -15,7 +15,7 @@ public class EmployeesMapping {
         public EmployeesDto convertToDto(Employees employee){
 
             EmployeesDto employeeDto = new EmployeesDto();
-
+            employeeDto.setId(employee.getId());
             employeeDto.setFirstName(employee.getFirstName());
             employeeDto.setLastName(employee.getLastName());
             employeeDto.setManager(employee.isManager());
